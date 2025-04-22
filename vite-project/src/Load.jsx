@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from 'react';
-
+function deleteProduct(id){ 
+  fetch('http://127.0.0.1:8000/api/students/'+id, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  }).then(response => {
+    if (response.ok) {
+      console.log('Product deleted successfully');
+    } else {
+      console.error('Error deleting product:', response.statusText);
+    }
+  })
+}
 function Load(){
     const [student, setStudent] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -47,8 +60,12 @@ return(
               <td>{s.last_name}</td>
               <td>{s.email}</td>
               <td>{s.mobile}</td>
-              <td className='btn btn-secondary'>Delete</td>
-              <td className='btn btn-primary'>Update</td>
+              <td><button className='btn btn-danger' onClick={()=>{
+                console.log('Deleting this ID:',s.id);
+                deleteProduct(s.id);
+               
+              }}>Delete</button>
+              <button className='btn btn-primary' onClick={()=>updateProduct(s.id)}>Edit</button></td>
             </tr>
           ))}
         </tbody>

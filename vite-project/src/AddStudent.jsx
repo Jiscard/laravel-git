@@ -51,23 +51,22 @@ fetch('http://127.0.0.1:8000/api/students', {
     };
 
     return (
-        <div>
+        <div className="container mt-0">
             <form onSubmit={submit}>
-            <label>First Name</label>
-            <input type="text" value={name} onChange={handleNameChange} />
+            <label style={{ marginTop:'1vh' }}>First Name</label>
+            <input type="text" value={name} onChange={handleNameChange} className="form-control" style={{width:'40%',}}/>
             <br />
-            <label>Last Name</label>
-            <input type="text" value={lastName} onChange={handleLastName} />
+            <label style={{ marginTop:'1vh' }}>Last Name</label>
+            <input type="text" value={lastName} onChange={handleLastName} className="form-control" style={{width:'40%'}}/>
             <br />
-            <label>Email </label>
-            <input type="email" value={email} onChange={handleEmail} />
+            <label style={{ marginTop:'1vh' }}>Email </label>
+            <input type="email" value={email} onChange={handleEmail}className="form-control" style={{width:'40%'}} />
             <br />
             <label>Mobile </label>
-            <input type="text" value={mobile} onChange={handleMobile} />
+            <input type="text" value={mobile} onChange={handleMobile} className="form-control" style={{width:'40%'}} />
             <br />
-            <button type="submit">add student</button>
+            <button type="submit" className="btn btn-primary">add student</button>
             </form>
-           
         </div>
     );
 }
