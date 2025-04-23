@@ -41,7 +41,7 @@ fetch('http://127.0.0.1:8000/api/students', {
     setName('');
     setLastName('');
     setMobile('');
-
+    window.location.href = '/'; // Redirect to the students page after adding a student
 })
 .catch(error => {
   console.log('Error:', error);

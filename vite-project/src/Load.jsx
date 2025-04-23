@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+
+function navigateToAdd(){
+  window.location.href = '/AddStudent'; // Redirect to the add page
+}
 function deleteProduct(id){ 
   fetch('http://127.0.0.1:8000/api/students/'+id, {
     method: 'DELETE',
@@ -8,6 +12,7 @@ function deleteProduct(id){
   }).then(response => {
     if (response.ok) {
       console.log('Product deleted successfully');
+      window.location.reload(); // Reload the page to see the updated list
     } else {
       console.error('Error deleting product:', response.statusText);
     }
@@ -41,6 +46,7 @@ function Load(){
     if (loading) return <p>loading users...</p>
 return(
     <>
+    <button className='btn btn-success float-end' style={{ marginRight:"20em" }} onClick={()=>navigateToAdd()}>Add</button>
  <table className="table">
         <thead>
           <tr>
@@ -60,12 +66,13 @@ return(
               <td>{s.last_name}</td>
               <td>{s.email}</td>
               <td>{s.mobile}</td>
-              <td><button className='btn btn-danger' onClick={()=>{
+              <td>      <button className='btn btn-danger' onClick={()=>{
                 console.log('Deleting this ID:',s.id);
                 deleteProduct(s.id);
-               
               }}>Delete</button>
-              <button className='btn btn-primary' onClick={()=>updateProduct(s.id)}>Edit</button></td>
+              <button className='btn btn-primary' onClick={()=>updateProduct(s.id)}>Edit</button>
+              
+              </td>
             </tr>
           ))}
         </tbody>
