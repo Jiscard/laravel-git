@@ -6,9 +6,11 @@ function Header(){
         <>
     <div>
         <section>
-            <h1 className=''>My web Development</h1>
+            <img src="/img/admatel.jpg" alt="" onClick={()=>{window.location.href = "dashboard"}} 
+            style={{cursor:"pointer", width:"350px", height:"auto"}} />
             
-  
+
+
         </section>
     </div>
         </>

@@ -46,11 +46,11 @@ function Load(){
     if (loading) return <p>loading users...</p>
 return(
     <>
-    <button className='btn btn-success float-end' style={{ marginRight:"20em" }} onClick={()=>navigateToAdd()}>Add</button>
- <table className="table">
+    <button className='btn btn-success' style={{ marginRight:"20em", position:"sticky" }} onClick={()=>navigateToAdd()}>Add</button>
+ <table className="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">NO.</th>
             <th scope="col">Name</th>
             <th scope="col">Last</th>
             <th scope="col">Email</th>
