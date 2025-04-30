@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\HasApiTokens;
 
 class UserController extends Controller
 {
+    use HasApiTokens, HasFactory, Notifiable;
     public function index()
     {
         $user = auth()->user();

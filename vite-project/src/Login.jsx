@@ -8,11 +8,12 @@ function Login() {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
-    // Add your login logic here (e.g., API call)
+    
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: '400px' }}>
+    <div style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '5px', width: '30rem', margin: 'auto', height: 'auto' }}>
+      <div className="container mt-5" style={{ maxWidth: '400px' }}>
       <h2 className="text-center">Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -40,6 +41,8 @@ function Login() {
         <button type="submit" className="btn btn-primary w-100">Login</button>
       </form>
     </div>
+    </div>
+    
   );
 }
 
