@@ -4,11 +4,16 @@ function navigateToAdd(){
   window.location.href = '/AddStudent'; // Redirect to the add page
 }
 function deleteProduct(id){ 
+  const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+  if (!confirmDelete) {
+    return; // Exit the function if the user cancels
+  }
   fetch('http://127.0.0.1:8000/api/students/'+id, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     },
+   
   }).then(response => {
     if (response.ok) {
       console.log('Product deleted successfully');
@@ -18,6 +23,7 @@ function deleteProduct(id){
     }
   })
 }
+
 function Load(){
     const [student, setStudent] = useState([]);
     const [loading, setLoading] = useState(true);

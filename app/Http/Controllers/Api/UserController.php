@@ -5,35 +5,31 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\User;
 
 class UserController extends Controller
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
     public function index()
     {
-        $user = auth()->user();
         return response()->json([
-            'user' => $user,
+            'users' => User::all(),
         ]);
     }
     public function store(Request $request)
     {
-        $valitade = $request->validate([
+        $validate = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-        ],201);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
         ]);
 
-        return response()->json([
-            'user' => $user,
-            'message' => 'User created successfully',	
-        ], 201);
+        $validate['password'] = Hash::make($validate['password']);
+
+        $user = User::create($validate);
+        dd($request->all());
+
+        return response()->json($user, 201);
     }
 
 }
