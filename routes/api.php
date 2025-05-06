@@ -15,4 +15,4 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('students', 'App\Http\Controllers\StudentController');
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
-
+Route::post('/login',[UserController::class, 'login']);

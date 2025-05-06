@@ -4,10 +4,35 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    
+    try{
+      const response = await fetch('http://127.0.0.1:8000/api/login',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      if(response.ok){
+        const data = await response.json();
+        console.log('Login successful:', data);
+        // Store the token in local storage
+        localStorage.setItem('token', data.token);
+        // Redirect to the dashboard
+        window.location.href = '/dashboard';
+      }else{
+        const errorData = await response.json();
+        console.error('Failed to login', errorData);
+        alert('Login failed. Please check your credentials.');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
     
   };
 

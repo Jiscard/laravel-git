@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Laravel\Sanctum\HasApiTokens;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 
 class UserController extends Controller
 {
@@ -27,9 +29,31 @@ class UserController extends Controller
         $validate['password'] = Hash::make($validate['password']);
 
         $user = User::create($validate);
-        dd($request->all());
+        
+       
 
         return response()->json($user, 201);
+    }
+    
+    public function login(Request $request)
+    {
+        $validate = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
+
+        if(Auth::attempt($validate)){
+            $user = Auth::user();
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'user' => $user,
+                'token' => $token,
+            ]);
+        }    
+        return response()->json([
+            'message' => 'Invalid credentials',
+        ], 401);
     }
 
 }
